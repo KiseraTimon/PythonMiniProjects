@@ -305,6 +305,3 @@ Tuples      Ordered, unchangeable, allows duplicate values
 Sets        Unordered, unindexed, does not allow duplicate values
 DictionariesOrdered, changeable, does not allow duplicate values
 """
-
-
-
