@@ -48,53 +48,70 @@ def confirm():
             else:
                 print("\n\n***** Invalid choice. Try again *****")
 
+#game function
 def game(play):
+    #validates the value of play variable
     while (play is True):
 
+        #Storing the game options
         game = ("Rock", "Paper", "Scissors")
+
+        #Random indexing for system decisions
         pick = random.randint(0,2)
+
+        #System decision
         system_choice = game[pick]
 
-        user_choice = str(input("\n\nRock, Paper Scissors? (r/p/s): ")).lower()
+        #Implementing error handling
+        try:
+            #Fetching the user's choice
+            user_choice = str(input("\n\nRock, Paper Scissors? (r/p/s): ")).lower()
 
-        if user_choice == "r" and system_choice == "Rock":
-            print("\n\nDraw! You both picked rock\n")
+            #Outputs if user and system decisions match
+            if user_choice == "r" and system_choice == "Rock":
+                print("\n\nDraw! You both picked rock\n")
+                confirm()
+                break
+            if user_choice == "p" and system_choice == "Paper":
+                print("\n\nDraw! You both picked paper\n")
+                confirm()
+                break
+            if user_choice == "s" and system_choice == "Scissors":
+                print("\n\nDraw! You both picked scissors\n")
+                confirm()
+                break
+            
+            #Outputs if user and system decisions vary
+            if user_choice == "r" and system_choice == "Paper":
+                print("\n\nYou lost!\nYou picked 🪨 and the system picked 🧻\nPaper wraps rock\n")
+                confirm()
+                break
+            if user_choice == "r" and system_choice == "Scissors":
+                print("\n\nYou won!\nYou picked 🪨 and the system picked ✂️\nRock crushes scissors\n")
+                confirm()
+                break
+            if user_choice == "p" and system_choice == "Rock":
+                print("\n\nYou won!\nYou picked 🧻 and the system picked 🪨\nPaper wraps rock\n")
+                confirm()
+                break
+            if user_choice == "p" and system_choice == "Scissors":
+                print("\n\nYou lost!\nYou picked 🧻 and the system picked ✂️\nScissors cut paper\n")
+                confirm()
+                break
+            if user_choice == "s" and system_choice == "Rock":
+                print("\n\nYou lost!\nYou picked ✂️ and the system picked 🪨\nRock crushes scissors\n")
+                confirm()
+                break
+            if user_choice == "s" and system_choice == "Paper":
+                print("\n\nYou won!\nYou picked ✂️ and the system picked 🧻\nScissors cut paper\n")
+                confirm()
+                break
+        #Exception handling
+        except Exception:
+            print("\n\nHmmm. Invalid input. Try again\n")
             confirm()
-            break
-        if user_choice == "p" and system_choice == "Paper":
-            print("\n\nDraw! You both picked paper\n")
-            confirm()
-            break
-        if user_choice == "s" and system_choice == "Scissors":
-            print("\n\nDraw! You both picked scissors\n")
-            confirm()
-            break
-
-        if user_choice == "r" and system_choice == "Paper":
-            print("\n\nYou lost!\nYou picked 🪨 and the system picked 🧻\nPaper wraps rock\n")
-            confirm()
-            break
-        if user_choice == "r" and system_choice == "Scissors":
-            print("\n\nYou won!\nYou picked 🪨 and the system picked ✂️\nRock crushes scissors\n")
-            confirm()
-            break
-        if user_choice == "p" and system_choice == "Rock":
-            print("\n\nYou won!\nYou picked 🧻 and the system picked 🪨\nPaper wraps rock\n")
-            confirm()
-            break
-        if user_choice == "p" and system_choice == "Scissors":
-            print("\n\nYou lost!\nYou picked 🧻 and the system picked ✂️\nScissors cut paper\n")
-            confirm()
-            break
-        if user_choice == "s" and system_choice == "Rock":
-            print("\n\nYou lost!\nYou picked ✂️ and the system picked 🪨\nRock crushes scissors\n")
-            confirm()
-            break
-        if user_choice == "s" and system_choice == "Paper":
-            print("\n\nYou won!\nYou picked ✂️ and the system picked 🧻\nScissors cut paper\n")
-            confirm()
-            break
     
+    #validating value of play variable
     while(play is False):
         print("\n\nThank you for playing. The game will exit\n")
         break
