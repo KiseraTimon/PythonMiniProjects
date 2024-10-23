@@ -116,4 +116,41 @@ def game(play):
         print("\n\nThank you for playing. The game will exit\n")
         break
 
+#Running the game
 start()
+
+
+#Alternative implementation
+import random
+
+"""Valid choices"""
+choices  = ("r","p","s")
+emojis = {"r": "🪨", "p":"🧻", "s":"✂️"}
+
+while True:
+    """Capturing choices"""
+    user_choice = str(input("Rock, paper, scissors? (r/p/s): ")).lower()
+    if user_choice not in choices:
+        print("Invalid choice")
+
+    system_choice = random.choice(choices)
+
+    """Printing choices"""
+    print(f'You chose {emojis[user_choice]}')
+    print(f'The system chose {emojis[system_choice]}')
+
+    """Determining the winner"""
+    if user_choice == system_choice:
+        print("It is a tie")
+    elif (
+    (user_choice == "r" and system_choice == "s") or
+    (user_choice == "s" and system_choice == "p") or
+    (user_choice == "p" and system_choice == "r")):
+        print("You win")
+    else:
+        print("You lose")
+
+    """Playing again"""
+    play_again = str(input("Do you want to play again? (y/n): ")).lower()
+    if play_again == 'n':
+        break
