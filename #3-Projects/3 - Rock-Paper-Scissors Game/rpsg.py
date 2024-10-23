@@ -132,6 +132,7 @@ while True:
     user_choice = str(input("Rock, paper, scissors? (r/p/s): ")).lower()
     if user_choice not in choices:
         print("Invalid choice")
+        continue
 
     system_choice = random.choice(choices)
 
