@@ -24,23 +24,31 @@ while True:
     #read file path
     filepath = str(input("\n\nEnter the file path of the associated pdf: ")).strip()
 
+    try:
     #Open the PDF file
-    fileread = PdfReader(filepath)
+        fileread = PdfReader(filepath)
 
-    #Count pages
-    pagecount = PdfReader.get_num_pages()
+        #Count pages
+        pagecount = len(fileread.pages)
 
-    #Extract content
-    pdfcontent = PdfReader.read()
+        #Extract content
+        pdfcontent = ""
 
-    #Outputs
-    print(f'Your filepath is: {filepath}')
-    print(f'Document page count is: {pagecount}')
-    print(f'PDF content is: {pdfcontent}')
+        #Looping through pages to extract content
+        for page in fileread.pages:
+            pdfcontent += page.extract_text()
 
-    #Retrying
-    retry = str(input("Retry? (y/n) ")).lower()
+        #Outputs
+        print(f'Your filepath is: {filepath}\n\n')
+        print(f'Document page count is: {pagecount}\n\n')
+        print(f'PDF content is: \n{pdfcontent}\n\n')
 
-    if retry == "n":
-        print(f'Thank you extracting with us: ')
-        break
+        #Retrying
+        retry = str(input("Retry? (y/n) ")).lower()
+
+        if retry == "n":
+            print(f'Thank you extracting with us: ')
+            break
+
+    except Exception as e:
+        print(f'An error occured:\n{e}')
