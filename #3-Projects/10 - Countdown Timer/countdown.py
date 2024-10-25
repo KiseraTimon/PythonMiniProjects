@@ -18,27 +18,50 @@ Display a message on completion
 
 import time
 
-def start_timer(timer):
-    while (timer[2] < 60 and timer[2] != 0):
-        timer[2] = timer[2] - 1
-        print(timer)
-    else:
-        while (timer[1] < 60 and timer[1] != 0):
-            timer[1] = timer[1] - 1
-            print (timer)
-        else:
-            while (timer[0] == 0 and timer[1] == 0 and timer[2] == 0):
-                print(timer)
-                print(f'Timer completed')
-                retry = str(input(f'Reset time? (y/n) ')).lower()
+#Function to computer time
+def start_timer(hours, minutes, seconds):
 
-                if retry == "n":
-                    break
+    #Convert time to seconds
+    totalseconds = (hours *3600) + (minutes *60) + seconds
 
+    #Countdown
+    while totalseconds > 0:
+
+        #Converting seconds to hours, minutes and seconds
+        hrs, remainder = divmod(totalseconds, 3600)
+        mins, secs = divmod(remainder, 60)
+
+        #Displaying the time
+        print (f"{hrs:02}:{mins:02}:{secs:02}", end="\r")
+
+        #Delay to realisitically display the time
+        time.sleep(1)
+
+        #Decrementing the time
+        totalseconds -= 1
+    
+    #Displaying the end of the timer
+    print(f"\nTimer has ended")
+
+    #Prompting the user to reset the timer
+    retry = str(input(f'Reset time? (y/n) ')).lower()
+    return retry == "y"
+
+
+#Looping timer body
 while True:
-    hours = int(input("How many hours? "))
+
+    #Capture user input
+    hours = int(input("\n\nHow many hours? "))
     minutes = int(input("How many minutes? "))
     seconds = int(input("How many seconds? "))
 
-    timer = [hours, minutes, seconds]
-    start_timer(timer)
+
+    #Start the timer
+    if start_timer(hours, minutes, seconds):
+        continue
+
+    #End the timer
+    else:
+        print("Thank you for using the countdown timer!")
+        break
