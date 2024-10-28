@@ -35,7 +35,7 @@ def main(init):
     while init == True:
 
         #Encrypt/Decrypt
-        service = int(input("Select a service to proceed:\n1. Encrypt text\n2. Decrypt file\n3. Exit\n\n"))
+        service = int(input("\nSelect a service to proceed:\n1. Encrypt text\n2. Decrypt file\n3. Exit\n\n"))
 
         if service == 1:
             encrypt()
@@ -55,7 +55,33 @@ def main(init):
 #Encryption function
 def encrypt():
     while True:
-        pass
+        textinput = str(input("\nEnter text to encrypt:\n"))
+
+        try:
+
+            #Encryption key
+            key = Fernet.generate_key()
+            f = Fernet(key)
+            token = f.encrypt(b'{textinput}')
+            
+
+            #Storing token in txt file
+            with open("crypt.txt", "w") as file:
+                file.write(f'\nToken generated:\n{token}\n')
+                print("\nToken saved successfully")
+
+        except Exception as e:
+            print(f'\nAn error has occured:\n{e}\n')
+            retry = str(input("Retry? (y/n) ")).lower()
+
+            if retry == "n":
+                init = True
+                main(init)
+                break
+            else:
+                print("Invalid input. The system will retry\n")
+                continue
+            
 
 def decrypt():
     while True:
