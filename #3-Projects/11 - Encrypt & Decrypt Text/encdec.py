@@ -61,17 +61,43 @@ def encrypt():
 
             #Encryption key
             key = Fernet.generate_key()
+            global f
             f = Fernet(key)
+            global token
             token = f.encrypt(b'{textinput}')
-            
 
-            #Storing token in txt file
+            #Storing key and token in txt file
             with open("crypt.txt", "w") as file:
-                file.write(f'\nToken generated:\n{token}\n')
-                print("\nToken saved successfully")
+                file.write(f'Key:\n{key.decode()}\nToken:\n{token.decode()}\n')
+                print("\nKey and token saved successfully")
+                return main(init)
 
         except Exception as e:
             print(f'\nAn error has occured:\n{e}\n')
+            retry = str(input("Retry? (y/n) ")).lower()
+
+            if retry == "n":
+                init = True
+                return main(init)
+                break
+            else:
+                print("Invalid input. The system will retry\n")
+                continue
+            
+
+def decrypt():
+    while True:
+        
+        print(f'\n\nDecrypting procedure starting\n\n')
+        
+        try:
+
+            data = f.decrypt(token)
+            b'{data}'
+            print(data)
+
+        except Exception as e:
+            print(f'Decryption failed:\n{e}\n')
             retry = str(input("Retry? (y/n) ")).lower()
 
             if retry == "n":
@@ -81,10 +107,5 @@ def encrypt():
             else:
                 print("Invalid input. The system will retry\n")
                 continue
-            
-
-def decrypt():
-    while True:
-        pass
 
 start()
