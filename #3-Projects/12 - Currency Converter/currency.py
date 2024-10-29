@@ -92,3 +92,10 @@ def repeat():
 
 #Initializing
 start()
+
+#Update
+"""
+Some currencies are not supported
+The map is not adhered to
+The functionalities are decomposed into methods
+"""
